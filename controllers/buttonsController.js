@@ -56,13 +56,7 @@ const buttonClock = {
         buttonClock.clockButton.classList.add('hide')
     },
     addNewTime() {
-        let newTimeMinutes = prompt("Informe os minutos")
-        if(isNaN(newTimeMinutes)){
-            buttonStop.stopButton()
-            return
-        }   
-        minutesSpanInitial = newTimeMinutes
-        displayUpdateTImer(minutesSpanInitial, '00')
+        addNewTimer()
     }
 }
 
@@ -116,6 +110,16 @@ function countDown() {
 function displayUpdateTImer(minutes, seconds) {
     minutesSpan.textContent = String(minutes).padStart(2, '0')
     secondsSpan.textContent = String(seconds).padStart(2, '0')
+}
+
+function addNewTimer(){
+let newTimeMinutes = prompt("Informe os minutos")
+if(isNaN(newTimeMinutes) || !newTimeMinutes){
+    buttonStop.pressStop()
+    return
+}   
+minutesSpanInitial = newTimeMinutes
+displayUpdateTImer(minutesSpanInitial, '00')
 }
 
 export { buttonPlay, buttonPause, buttonClock, buttonStop }
