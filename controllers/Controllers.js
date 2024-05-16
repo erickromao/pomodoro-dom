@@ -89,7 +89,7 @@ function countDown() {
         let minutesDecrement = Number(minutesSpan.textContent)
         let secondsDecrement = Number(secondsSpan.textContent)
 
-        if (minutesDecrement <= 0) {
+        if (minutesDecrement <= 0 && secondsDecrement <= 0) {
             displayUpdateTImer(minutesSpanInitial, '00')
             buttonStop.pressStop()
             return
@@ -100,7 +100,7 @@ function countDown() {
 
             --minutesDecrement
         }
-
+        
         displayUpdateTImer(minutesDecrement, secondsDecrement - 1)
 
         countDown()
