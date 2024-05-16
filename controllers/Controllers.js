@@ -97,7 +97,7 @@ function countDown() {
         }
 
         if (secondsDecrement <= 0) {
-            secondsDecrement = 2
+            secondsDecrement = 60
 
             --minutesDecrement
         }
