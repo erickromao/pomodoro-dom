@@ -1,8 +1,8 @@
-const minutes = document.querySelector('#minutes')
-const seconds = document.querySelector('#seconds')
+let minutesSpan = document.querySelector('#minutes')
+let secondsSpan = document.querySelector('#seconds')
 
-let displayMinutes = minutes.textContent
-let displaySeconds = seconds.textContent
+let minutesSpanInitial = minutesSpan.textContent
+let valueTimeOut
 
 const buttonPlay = {
     playButton: document.querySelector('#buttonPlay'),
@@ -13,9 +13,7 @@ const buttonPlay = {
         buttonClock.clockButtonRemove()
         buttonStop.stopButtonAdd()
 
-        console.log(displayMinutes)
-        console.log(displaySeconds)
-        
+        countDown()
     },
 
     playButtonAdd() {
@@ -24,7 +22,7 @@ const buttonPlay = {
 
     playButtonRemove() {
         buttonPlay.playButton.classList.add('hide')
-    }
+    },
 }
 
 
@@ -34,6 +32,8 @@ const buttonPause = {
     pressPause() {
         buttonPlay.playButtonAdd()
         buttonPause.pauseButtonRemove()
+
+        clearTimeout(valueTimeOut)
     },
 
     pauseButtonAdd() {
@@ -54,6 +54,15 @@ const buttonClock = {
     },
     clockButtonRemove() {
         buttonClock.clockButton.classList.add('hide')
+    },
+    addNewTime() {
+        let newTimeMinutes = prompt("Informe os minutos")
+        if(!newTimeMinutes){
+            buttonStop.stopButton()
+            return
+        }
+        minutesSpanInitial = newTimeMinutes
+        displayUpdateTImer(newTimeMinutes, '00')
     }
 }
 
@@ -67,6 +76,9 @@ const buttonStop = {
 
         buttonStop.stopButtonRemove()
         buttonClock.clockButtonAdd()
+
+        clearTimeout(valueTimeOut)
+        displayUpdateTImer(minutesSpanInitial, '00')
     },
 
     stopButtonAdd() {
@@ -75,6 +87,35 @@ const buttonStop = {
     stopButtonRemove() {
         buttonStop.stopButton.classList.add('hide')
     }
+}
+
+
+function countDown() {
+    valueTimeOut = setTimeout(() => {
+        let minutesDecrement = Number(minutesSpan.textContent)
+        let secondsDecrement = Number(secondsSpan.textContent)
+
+        if (minutesDecrement <= 0) {
+            displayUpdateTImer(minutesSpanInitial, '00')
+            buttonStop.pressStop()
+            return
+        }
+
+        if (secondsDecrement <= 0) {
+            secondsDecrement = 60
+
+            --minutesDecrement
+        }
+
+        displayUpdateTImer(minutesDecrement, secondsDecrement - 1)
+
+        countDown()
+    }, 1000)
+}
+
+function displayUpdateTImer(minutes, seconds) {
+    minutesSpan.textContent = String(minutes).padStart(2, '0')
+    secondsSpan.textContent = String(seconds).padStart(2, '0')
 }
 
 export { buttonPlay, buttonPause, buttonClock, buttonStop }
