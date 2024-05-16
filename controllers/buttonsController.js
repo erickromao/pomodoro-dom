@@ -57,12 +57,12 @@ const buttonClock = {
     },
     addNewTime() {
         let newTimeMinutes = prompt("Informe os minutos")
-        if(!newTimeMinutes){
+        if(isNaN(newTimeMinutes)){
             buttonStop.stopButton()
             return
-        }
+        }   
         minutesSpanInitial = newTimeMinutes
-        displayUpdateTImer(newTimeMinutes, '00')
+        displayUpdateTImer(minutesSpanInitial, '00')
     }
 }
 
