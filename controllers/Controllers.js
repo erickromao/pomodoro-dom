@@ -90,17 +90,18 @@ function countDown() {
         let secondsDecrement = Number(secondsSpan.textContent)
 
         if (minutesDecrement <= 0 && secondsDecrement <= 0) {
-            displayUpdateTImer(minutesSpanInitial, '00')
+            alertSongEnd()
             buttonStop.pressStop()
+            displayUpdateTImer(minutesSpanInitial, '00')
             return
         }
 
         if (secondsDecrement <= 0) {
-            secondsDecrement = 60
+            secondsDecrement = 2
 
             --minutesDecrement
         }
-        
+
         displayUpdateTImer(minutesDecrement, secondsDecrement - 1)
 
         countDown()
@@ -122,6 +123,12 @@ function addNewTimer() {
 
     minutesSpanInitial = newTimeMinutes
     displayUpdateTImer(minutesSpanInitial, '00')
+}
+
+function alertSongEnd() {
+    const endSongAlert = new Audio('./src/endSongTime.mp3')
+    return endSongAlert.play()
+
 }
 
 export { buttonPlay, buttonPause, buttonClock, buttonStop }
