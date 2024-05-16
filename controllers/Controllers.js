@@ -112,14 +112,16 @@ function displayUpdateTImer(minutes, seconds) {
     secondsSpan.textContent = String(seconds).padStart(2, '0')
 }
 
-function addNewTimer(){
-let newTimeMinutes = prompt("Informe os minutos")
-if(isNaN(newTimeMinutes) || !newTimeMinutes){
-    buttonStop.pressStop()
-    return
-}   
-minutesSpanInitial = newTimeMinutes
-displayUpdateTImer(minutesSpanInitial, '00')
+function addNewTimer() {
+    let newTimeMinutes = prompt("Informe os minutos")
+    if (isNaN(newTimeMinutes) || !newTimeMinutes) {
+        buttonStop.pressStop()
+        return
+    }
+    if (newTimeMinutes > 60) return alert('Valor máximo é 60 minutos!')
+
+    minutesSpanInitial = newTimeMinutes
+    displayUpdateTImer(minutesSpanInitial, '00')
 }
 
 export { buttonPlay, buttonPause, buttonClock, buttonStop }
