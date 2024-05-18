@@ -14,6 +14,7 @@ const buttonPlay = {
         buttonStop.stopButtonAdd()
 
         countDown()
+        songPressButton()
     },
 
     playButtonAdd() {
@@ -34,6 +35,7 @@ const buttonPause = {
         buttonPause.pauseButtonRemove()
 
         clearTimeout(valueTimeOut)
+        songPressButton()
     },
 
     pauseButtonAdd() {
@@ -70,6 +72,7 @@ const buttonStop = {
 
         buttonStop.stopButtonRemove()
         buttonClock.clockButtonAdd()
+        songPressButton()
 
         clearTimeout(valueTimeOut)
         displayUpdateTImer(minutesSpanInitial, '00')
@@ -129,6 +132,11 @@ function alertSongEnd() {
     const endSongAlert = new Audio('./src/endSongTime.mp3')
     return endSongAlert.play()
 
+}
+
+function songPressButton(){
+    const buttonPressAudio = new Audio("./src/button-press.wav")
+    buttonPressAudio.play()
 }
 
 export { buttonPlay, buttonPause, buttonClock, buttonStop }
